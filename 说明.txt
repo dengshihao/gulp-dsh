@@ -1,0 +1,15 @@
+想要完美运行自动添加版本号：
+
+1、更改gulp-rev和gulp-rev-collector
+
+打开node_modules\gulp-rev\index.js
+找到：  manifest[originalFile] = revisionedFile;
+更新为: manifest[originalFile] = originalFile + '?v=' + file.revHash;
+
+2、打开nodemodules\gulp-rev\nodemodules\rev-path\index.js
+找到：  return filename + '-' + hash + ext;
+更新为: return filename + ext;
+
+3、打开node_modules\gulp-rev-collector\index.js
+找到：  path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' )
+更新为：path.basename(json[key]).split('?')[0]
